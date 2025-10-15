@@ -1,0 +1,539 @@
+@charset "UTF-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,regular,500,600,700,800,900&display=swap);
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  -moz-appearance: revert;
+       appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+  all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::-moz-placeholder {
+  color: unset;
+}
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+}
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  color: #000;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+p {
+  line-height: 150%;
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: 600;
+  text-align: center;
+  margin: 25px 0;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 20px auto;
+  text-align: center;
+  border-bottom: 1.5px solid #ffb400;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+h3 {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 15px 0;
+}
+
+ol {
+  list-style: decimal;
+  padding: 15px 25px;
+}
+
+ul {
+  list-style: disc;
+  padding: 15px 25px;
+}
+
+li {
+  line-height: 150%;
+}
+
+ol li::marker,
+ul li::marker {
+  color: #f4b73e;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+  display: block;
+  overflow: auto;
+}
+table tr td,
+table tr th {
+  border: 1px solid #333;
+  padding: 15px;
+}
+table tr th {
+  background-color: #f4b73e;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+table tr td:hover {
+  background-color: #e3e3e3;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background: #fff;
+  padding: 20px 0;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.header .container .logo img {
+  max-width: 80px;
+}
+.header .container .logo a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #f4b73e;
+  text-transform: uppercase;
+}
+.header .container .auth {
+  display: flex;
+  gap: 15px;
+}
+.header .container .auth .btn-1 {
+  background-color: #ffb400;
+  animation: glowing 1500ms infinite;
+}
+.header .container .auth .btn-1:hover {
+  animation: none;
+  background-color: #000;
+  color: #ffb400;
+}
+.header .container .auth .btn-2 {
+  border: 1.5px solid #ffb400;
+}
+.header .container .auth .btn-2:hover {
+  background-color: #ffb400;
+}
+
+.btn {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 25px;
+  border: 1.5px solid transparent;
+  transition: all 0.3s;
+}
+
+.main {
+  height: 100%;
+  flex: 1 1 auto;
+  padding: 120px 0 50px;
+}
+.main .banner {
+  background-color: #ffb400;
+  padding: 50px 0;
+}
+.main .banner .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.main .banner .item {
+  flex: 0 0 40%;
+}
+.main .banner .item img {
+  animation: transform 5s infinite;
+  max-width: 400px;
+}
+.main .banner__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.main .banner__text h1 {
+  margin: 0;
+  text-align: left;
+}
+.main .banner__img {
+  text-align: center;
+}
+.main .banner__btn a {
+  background-color: #fff;
+  white-space: nowrap;
+  font-size: 18px;
+}
+.main .banner__btn a:hover {
+  background-color: #000;
+  color: #f4b73e;
+}
+.main .games-wrap {
+  padding: 75px 16px 50px 16px;
+  border-bottom: 1.5px solid #000;
+}
+.main .games-wrap h2 {
+  margin: 0 auto 70px;
+}
+.main .games-wrap .container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.main .games-wrap .game-item {
+  display: inline-flex;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  margin: 0 5px 50px;
+}
+.main .games-wrap .game-item_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+.main .games-wrap .game-item_play {
+  background: #ffb400;
+  color: #000;
+  padding: 13px 24px;
+  font-size: 14px;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-bottom: 103px;
+  transition: all 0.3s;
+}
+.main .games-wrap .game-item_play:hover {
+  background: #000;
+  color: #ffb400;
+}
+.main .games-wrap .game-item_name {
+  margin-top: -25px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.main .content {
+  padding: 50px 0;
+}
+.main .content p {
+  margin: 15px 0;
+}
+.main .content img {
+  display: flex;
+  margin: 0 auto;
+  max-width: 500px;
+}
+.main .content .anchors {
+  border: solid 1px;
+  background: #ffb400;
+}
+
+.container {
+  max-width: 90vw;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.footer {
+  padding: 30px 0;
+  border-top: 1.5px solid #000;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    margin: 20px 0;
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 24px;
+    margin: 15px 0;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .container {
+    max-width: 100%;
+  }
+  .btn {
+    padding: 10px 15px;
+  }
+  .header .container {
+    justify-content: center;
+    gap: 15px;
+  }
+  .header .container .logo img {
+    max-width: 50px;
+  }
+  .main {
+    padding: 150px 0 30px;
+  }
+  .main .banner {
+    padding: 30px 0;
+  }
+  .main .banner .container {
+    gap: 30px;
+    flex-direction: column;
+  }
+  .main .banner__img {
+    max-width: 250px;
+  }
+  .main .banner .item {
+    flex: 1 1 auto;
+  }
+  .main .banner .item img {
+    max-width: 100%;
+  }
+  .main .games-wrap {
+    padding: 45px 16px 30px 16px;
+  }
+  .main .games-wrap .game-item {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  .main .games-wrap .game-item:not(:last-child) {
+    margin-bottom: 50px;
+  }
+  .main .games-wrap .game-item_play {
+    margin-bottom: 128px;
+  }
+  .main .content {
+    padding: 30px 0;
+  }
+  .main .content img {
+    max-width: 100%;
+  }
+}
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 5px #c1c0c0;
+  }
+  50% {
+    box-shadow: 0 0 20px #f4b73e;
+  }
+  100% {
+    box-shadow: 0 0 5px #c1c0c0;
+  }
+}
+@keyframes transform {
+  0% {
+    transform: translate3d(-15px, 0, 0);
+  }
+  50% {
+    transform: translate3d(15px, 0, 0);
+  }
+  100% {
+    transform: translate3d(-15px, 0, 0);
+  }
+}
+
+/* 
+baners start*/
+
+.block_90 {
+    padding: 0 16px;
+    display: block;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+@media (min-width: 991px) {
+    .block_90 {
+        display: none;
+			max-width: 100%;
+    }
+}
+@media (max-width: 991px) {
+    .block-main-image {
+        display: none;
+    }
+}
+@media (max-width: 991px) {
+    .block-main {
+        min-height: inherit;
+        padding: 20px 0;
+    }
+}
+@media (max-width: 991px) {
+    .hero-block {
+        margin-bottom: 12px;
+    }
+}
+
+
+.block_100 {
+	max-width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+
+@media (max-width: 991px) {
+    .block_100 {
+        display: none;
+    }
+}
+.hero-block {
+    margin-bottom: 20px;
+}
+
+
+.link-head-a {
+    display: block !important;
+    margin: 12px auto;
+    text-align: center;
+}
+
+.wrapper_link-head {
+	max-width: 300px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+
+.link-head-a {
+    display: block !important;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* 
+baners end*/
